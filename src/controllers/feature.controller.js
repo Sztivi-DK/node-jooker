@@ -1,10 +1,13 @@
 class FeatureController {
     static servicesPage(request, response) {
-        const model = {title: 'Szolgáltatásaink'};
+        const serviceModel = require('../models/service.model');
+        const services = serviceModel.getServices();
+        console.log(services);
+        const model = {title: 'Szolgáltatásaink', services:services};
         response.render('pages/services', model);
     }
     static referencesPage(request, response) {
-        const model = {title: 'Korábbi munkáink'};
+        const model = {title: 'Eredményeink'};
         response.render('pages/references', model);
     }
 }
