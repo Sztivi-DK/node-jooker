@@ -1,0 +1,17 @@
+<%- include('../partials/header') %>
+
+<section id="referenciak" class="section gray">
+    <div class="container">
+    <h2>Referenciák</h2>
+
+    <div class="references-grid">
+        <% for (let ref of references) {%>
+            <div class="ref-card">
+                <a href="/referenciak/<%= ref.id %>"><%= ref.title %></a>
+            </div>
+        <% } %>
+        </div>
+    </div>
+</section>
+
+<%- include('../partials/footer') %>
