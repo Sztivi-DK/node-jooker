@@ -1,3 +1,4 @@
+const { response } = require('express');
 const PageModel = require('../models/page.model');
 
 class PageController {
@@ -8,6 +9,10 @@ class PageController {
     static contactsPage(request, response) {
         const model = {title: 'Elérhetőségeink', content: PageModel.getContactContent()};
         response.render('pages/contacts', model);
+    }
+    static notFoundPage(request, response) {
+        const model = {title: 'Nem található'};
+        response.render('pages/notfound', model);
     }
 }
 

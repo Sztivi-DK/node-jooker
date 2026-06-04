@@ -7,4 +7,7 @@ app.use( express.static('public') );
 const router = require('./routes');
 app.use(router);
 
+const pages = require('./controllers/page.controller');
+app.use(pages.notFoundPage);
+
 app.listen(8887);
