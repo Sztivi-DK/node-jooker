@@ -1,0 +1,16 @@
+<%- include('../partials/header') %>
+
+<% if (reference) { %> 
+    <article>
+        <h2><%= reference.title %></h2>
+        <p><strong><%= reference.intro %></strong></p>
+        <% for (let line of reference.content) { %>
+            <p><%= line %></p>
+        <% } %>
+    </article>
+<% } else { %>
+    <h2>Nem található</h2>
+    <p>A kért referencia nem szerepel az adatbázisban.</p>
+<% } %>
+
+<%- include('../partials/footer') %>
