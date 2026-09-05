@@ -16,4 +16,4 @@ connection.connect((err) => {
     console.log('Sikeres adatbázis kapcsolat!');
 });
 
-module.exports = connection;
+module.exports = connection.promise();

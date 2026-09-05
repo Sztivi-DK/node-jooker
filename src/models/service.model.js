@@ -1,19 +1,14 @@
-const fs = require('fs');
+//const fs = require('fs');
+const connection = require('../config/database');
 
 class ServiceModel {
-    static getServices() {
-        let content = fs.readFileSync('./contents/services.txt', 'utf-8');
-        let lines = content.split('\n');
-        let nonEmptyLines = lines.filter(item => item.trim() != '');
-        let items = nonEmptyLines.map(item => {
-            const parts = item.trim().split(';');
-            const obj = {
-                name: parts[0],
-                description: parts[1]
-            };
-            return obj;
-        });
-        return items;
+    static async getServices() {
+        const [results] = await connection.query('SELECT * FROM services WHERE active = 1');
+        return results;
+    }
+    static async getServiceById(id) {
+        const [results] = await connection.query('SELECT * FROM services WHERE id = ? AND active = 1', [id]);
+        return results[0];
     }
 }
 

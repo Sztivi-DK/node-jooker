@@ -7,8 +7,10 @@
         <div class="services-grid"> 
             <% for (const srv of services) { %>    
                 <div class="card">
+                    <% if (srv.image) { %><img src="<%= srv.image %>" alt="<%= srv.name %>"><% } %>
                     <h3><%= srv.name %></h3>
-                    <p><%= srv.description %></p>
+                    <p><%= srv.short_description %></p>
+                    <a href="/szolgaltatasok/<%= srv.id %>">Részletek</a>
                 </div>
             <% } %>
         </div>
