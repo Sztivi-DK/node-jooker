@@ -29,6 +29,7 @@ header{
     z-index:999;
     background:rgba(10,10,10,.95);
     backdrop-filter:blur(8px);
+    color: wheat;
 }
 
 .nav-container{
@@ -121,6 +122,19 @@ nav a:hover{
     text-align:center;
     margin-bottom:50px;
     font-size:42px;
+}
+
+
+.notfound{
+    text-align:center;
+    padding:100px 20px;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.notfound p{
+    font-size:24px;
 }
 
 .gray{
@@ -216,5 +230,13 @@ footer{
 
     .contact-wrapper{
         grid-template-columns:1fr;
+    }
+
+    .notfound{
+        padding:80px 20px;
+    }
+
+    .notfound p{
+        font-size:18px;
     }
 }
