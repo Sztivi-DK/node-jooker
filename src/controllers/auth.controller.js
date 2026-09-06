@@ -3,6 +3,11 @@ const jwt = require('jsonwebtoken');
 const UserModel = require('../models/user.model');
 
 class AuthController {
+    static loginPage(request, response) {
+        response.render('pages/login', {
+            title: 'Admin belépés'
+        });
+    }
     static async login(request, response) {
         const email = request.body.email;
         const password = request.body.password;
@@ -35,12 +40,11 @@ class AuthController {
             }
         );
 
-        response.json({
-            success: true,
-            data: {
-                token: token
-            }
+        response.cookie('token', token, {
+            httpOnly: true
         });
+
+        response.redirect('/admin');
     }
 }
 
