@@ -20,19 +20,25 @@ class FeatureController {
         response.render('pages/service', model);
     }
 
-    static referencesPage(request, response) {
+    static async referencesPage(request, response) {
         const referenceModel = require('../models/reference.model');
-        const references = referenceModel.getReferences();
+        const references = await referenceModel.getReferences();
         const model = {title: 'Eredményeink', references: references};
         response.render('pages/references', model);
     }
 
-    static readingPage(request, response) {
+    static async readingPage(request, response) {
         const id = request.params.id;
         const referenceModel = require('../models/reference.model');
-        const reference = referenceModel.getReferenceById(id);
-        const model = {title: 'Eredményeink', reference: reference};
-        response.status(reference ? 200 : 404).render('pages/read', model);
+        const reference = await referenceModel.getReferenceById(id);
+        if (!reference) {
+            return response.status(404).render('pages/notfound', {
+                title: 'Nem található'
+            });
+        }
+
+        const model = {title: reference.title, reference: reference};
+        response.render('pages/read', model);
     }
 }
 

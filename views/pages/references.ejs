@@ -7,8 +7,11 @@
         <div class="references-grid">
             <% for (let ref of references) {%>
                 <div class="ref-card">
+                    <% if (ref.image) { %>
+                        <img src="<%= ref.image %>" alt="<%= ref.title %>">
+                    <% } %>
                     <h3><%= ref.title %></h3>
-                    <p><%= ref.intro %></p>
+                    <p><%= ref.short_description %></p>
                     <a href="/referenciak/<%= ref.id %>">Elolvasom</a>
                 </div>
             <% } %>

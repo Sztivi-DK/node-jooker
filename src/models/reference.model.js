@@ -1,45 +1,13 @@
-const fs = require('fs');
+const connection = require('../config/database');
 
 class ReferenceModel {
-    static getReferences() {
-        let references = [];
-        let a = 1;
-        let file = `./contents/references/reference-${a}.txt`;
-        while (fs.existsSync(file)) {
-            let content = fs.readFileSync(file, 'utf-8');
-            let lines = content.split('\n');
-            let obj = {
-                id: a,
-                title: lines[0].trim(),
-                intro: lines[1].trim()
-            };
-            references.push(obj);
-
-            a++;
-            file = `./contents/references/reference-${a}.txt`;
-        }
-        return references;
+    static async getReferences() {
+        const [results] = await connection.query('SELECT * FROM `references` WHERE active = 1');
+        return results;
     }
-    static getReferenceById(id) {
-        let file = `./contents/references/reference-${id}.txt`;
-        if (fs.existsSync(file)) {
-            let content = fs.readFileSync(file, 'utf-8');
-            let lines = content.split('\n');
-            let obj = {
-                id: id,
-                title: lines[0].trim(),
-                intro: lines[1].trim(),
-                content: []
-            };
-            for (let i= 2; i < lines.length; i++) {
-                let line = lines[i].trim();
-                if (line) {
-                    obj.content.push(line);
-                }
-            }
-            return obj;
-        }
-        return null;
+    static async getReferenceById(id) {
+        const [results] = await connection.query('SELECT * FROM `references` WHERE id = ? AND active = 1', [id]);
+        return results[0];
     }
 }
 

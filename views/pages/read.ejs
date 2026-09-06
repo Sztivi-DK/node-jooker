@@ -1,22 +1,20 @@
 <%- include('../partials/header') %>
 
 <section id="referenciak" class="section gray">
-    <% if (reference) { %> 
-        <div class="container">
-            <article>
-                <h2><%= reference.title %></h2>
-                <p><strong><%= reference.intro %></strong></p>
-                <% for (let line of reference.content) { %>
-                    <p><%= line %></p>
-                <% } %>
-            </article>
-        </div>
-    <% } else { %>
-        <div class="container notfound">
-            <h2>Nem található</h2>
-            <p>A kért referencia nem szerepel az adatbázisban.</p>
-        </div>
-    <% } %>
+    <div class="container">
+        <article>
+            <h2><%= reference.title %></h2>
+            <% if (reference.image) { %>
+                <img src="<%= reference.image %>" alt="<%= reference.title %>">
+            <% } %>
+
+            <% if (reference.date) { %>
+                <p><strong>Dátum:</strong> <%= reference.date.toLocaleDateString('hu-HU') %></p>
+            <% } %>
+            <p><strong>Helyszín:</strong> <%= reference.location %></p>
+            <p><%= reference.detailed_description %></p>
+        </article>
+    </div>
 </section>
 
 <%- include('../partials/footer') %>
