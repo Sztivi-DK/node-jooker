@@ -5,7 +5,21 @@
         <h2>Kapcsolat</h2>
 
         <div class="contact-wrapper">
-            <%- content %>
+            <div>
+                <h3>Elérhetőségek</h3>
+                <p>+36 30 123 4567</p>
+                <p>info@jookerteam.hu</p>
+                <p>Budapest, Magyarország</p>
+            </div>
+
+            <form action="/kapcsolat" method="POST">
+                <input type="text" name="name" placeholder="Név" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <textarea name="message" placeholder="Üzenet" required></textarea>
+                <button type="submit">
+                    Küldés
+                </button>
+            </form>
         </div>
     </div>
 </section>

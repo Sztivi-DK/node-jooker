@@ -2,9 +2,7 @@ class PageModel {
     static getHomeContent() {
         return this._getPageContent('home');
     }
-    static getContactContent() {
-        return this._getPageContent('contact');
-    } 
+     
     static _getPageContent(page) {
         const fs = require('fs');
         return fs.readFileSync('./contents/pages/'+page+'.html', 'utf-8');

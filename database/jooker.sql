@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 05, 2026 at 12:39 PM
+-- Generation Time: Sep 06, 2026 at 01:05 AM
 -- Server version: 8.0.44
 -- PHP Version: 8.2.29
 
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `jooker`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `id` int UNSIGNED NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
+  `message` text COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -54,6 +69,13 @@ CREATE TABLE `references` (
   `deactivated_by_service` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `references`
+--
+
+INSERT INTO `references` (`id`, `title`, `short_description`, `detailed_description`, `image`, `date`, `location`, `service_id`, `active`, `deactivated_by_service`) VALUES
+(1, 'Teszt referencia', 'Ez egy teszt referencia rövid leírása.', 'Ez a referencia az adatbázisos működés tesztelésére szolgál.', NULL, '2026-09-06', 'Budapest', 1, 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -68,6 +90,13 @@ CREATE TABLE `services` (
   `image` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`id`, `name`, `short_description`, `detailed_description`, `image`, `active`) VALUES
+(1, 'Teszt szolgáltatás', 'Ez egy teszt szolgáltatás.', 'Ez a szolgáltatás az adatbázis-kapcsolat tesztelésére szolgál.', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -86,6 +115,12 @@ CREATE TABLE `users` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `news`
@@ -120,6 +155,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
@@ -129,13 +170,13 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `references`
 --
 ALTER TABLE `references`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`

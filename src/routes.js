@@ -10,5 +10,6 @@ router.get('/szolgaltatasok/:id', features.servicePage);
 router.get('/referenciak', features.referencesPage);
 router.get('/referenciak/:id', features.readingPage);
 router.get('/kapcsolat', pages.contactsPage);
+router.post('/kapcsolat', pages.createContact);
 
 module.exports = router;
