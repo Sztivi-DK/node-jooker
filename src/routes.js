@@ -16,6 +16,7 @@ router.get('/kapcsolat', pages.contactsPage);
 router.post('/kapcsolat', pages.createContact);
 router.get('/login', auth.loginPage);
 router.post('/login', auth.login);
+router.get('/logout', auth.logout);
 router.get('/admin', authMiddleware, admin.adminPage);
 router.get('/admin/test', authMiddleware, (request, response) => {
     response.json({

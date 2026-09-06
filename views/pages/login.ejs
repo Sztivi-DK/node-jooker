@@ -4,6 +4,10 @@
     <div class="container">
         <h2>Admin belépés</h2>
 
+        <% if (typeof error !== 'undefined') { %>
+            <p><%= error %></p>
+        <% } %>
+
         <form action="/login" method="POST">
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Jelszó" required>

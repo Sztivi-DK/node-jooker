@@ -14,18 +14,18 @@ class AuthController {
         const user = await UserModel.getUserByEmail(email);
 
         if (!user) {
-            return response.status(401).json({
-                success: false,
-                data: 'Hibás email vagy jelszó'
+           return response.status(401).render('pages/login', {
+                title: 'Admin belépés',
+                error: 'Hibás email vagy jelszó'
             });
         }
 
         const passwordCorrect = await bcrypt.compare(password, user.password);
 
         if (!passwordCorrect) {
-            return response.status(401).json({
-                success: false,
-                data: 'Hibás email vagy jelszó'
+            return response.status(401).render('pages/login', {
+                title: 'Admin belépés',
+                error: 'Hibás email vagy jelszó'
             });
         }
 
@@ -45,6 +45,10 @@ class AuthController {
         });
 
         response.redirect('/admin');
+    }
+    static logout(request, response) {
+        response.clearCookie('token');
+        response.redirect('/login');
     }
 }
 

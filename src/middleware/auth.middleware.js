@@ -10,20 +10,14 @@ function auth(request, response, next) {
     }
 
     if (!token) {
-        return response.status(401).json({
-            success: false,
-            data: 'Nincs Authorization token'
-        });
+        return response.redirect('/login');
     }
 
     try {
         jwt.verify(token, process.env.JWT_SECRET);
         next();
     } catch (error) {
-        return response.status(401).json({
-            success: false,
-            data: 'Érvénytelen token'
-        });
+        return response.redirect('/login');
     }
 }
 
