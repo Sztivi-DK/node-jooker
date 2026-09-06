@@ -18,11 +18,14 @@ router.get('/login', auth.loginPage);
 router.post('/login', auth.login);
 router.get('/logout', auth.logout);
 router.get('/admin', authMiddleware, admin.adminPage);
+router.get('/admin/szolgaltatasok', authMiddleware, admin.servicesPage);
 router.get('/admin/test', authMiddleware, (request, response) => {
     response.json({
         success: true,
         data: 'Sikeres admin hitelesítés'
     });
 });
+router.post('/admin/szolgaltatasok/:id/deactivate', authMiddleware, admin.deactivateService);
+router.post('/admin/szolgaltatasok/:id/restore', authMiddleware, admin.restoreService);
 
 module.exports = router;
