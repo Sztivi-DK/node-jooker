@@ -1,0 +1,41 @@
+<%- include('../partials/header') %>
+
+<section class="section">
+    <div class="container">
+        <h2>Új szolgáltatás</h2>
+
+        <form action="/admin/szolgaltatasok/create" method="POST">
+            <input
+                type="text"
+                name="name"
+                placeholder="Név"
+                required
+            >
+
+            <input
+                type="text"
+                name="short_description"
+                placeholder="Rövid leírás"
+                required
+            >
+
+            <textarea
+                name="detailed_description"
+                placeholder="Részletes leírás"
+                required
+            ></textarea>
+
+            <input
+                type="text"
+                name="image"
+                placeholder="Kép elérési útja"
+            >
+
+            <button type="submit">
+                Mentés
+            </button>
+        </form>
+    </div>
+</section>
+
+<%- include('../partials/footer') %>

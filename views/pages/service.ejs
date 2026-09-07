@@ -10,6 +10,32 @@
         <% } %>
 
         <p><%= service.detailed_description %></p>
+        
+        <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
+            <p><strong>Állapot: </strong><%= service.active ? 'Aktív' : 'Inaktív' %></p>
+
+            <div class="form-actions">
+                <button
+                    type="button"
+                    onclick="window.location.href='/admin/szolgaltatasok/<%= service.id %>/edit'">Szerkesztés
+                </button>
+
+                <% if (service.active) { %>
+                    <form action="/admin/szolgaltatasok/<%= service.id %>/deactivate" method="POST">
+                        <button type="submit">Deaktiválás</button>
+                    </form>
+                <% } else { %>
+                    <form action="/admin/szolgaltatasok/<%= service.id %>/restore" method="POST">
+                        <button type="submit">Visszaállítás</button>
+                    </form>
+                <% } %>
+
+                <button
+                    type="button"
+                    onclick="window.location.href='/admin/szolgaltatasok'">Vissza
+                </button>
+            </div>
+        <% } %>
 
     </div>
 </section>

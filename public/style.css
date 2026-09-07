@@ -187,6 +187,12 @@ form{
     gap:15px;
 }
 
+.form-actions{
+    display:flex;
+    gap: 30px;
+    justify-content:center;
+}
+
 input,
 textarea{
     padding:15px;

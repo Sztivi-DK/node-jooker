@@ -25,6 +25,10 @@ router.get('/admin/test', authMiddleware, (request, response) => {
         data: 'Sikeres admin hitelesítés'
     });
 });
+router.get('/admin/szolgaltatasok/create', authMiddleware, admin.newServicePage);
+router.post('/admin/szolgaltatasok/create', authMiddleware, admin.createService);
+router.get('/admin/szolgaltatasok/:id/edit', authMiddleware, admin.editServicePage);
+router.post('/admin/szolgaltatasok/:id/edit', authMiddleware, admin.updateService);
 router.post('/admin/szolgaltatasok/:id/deactivate', authMiddleware, admin.deactivateService);
 router.post('/admin/szolgaltatasok/:id/restore', authMiddleware, admin.restoreService);
 

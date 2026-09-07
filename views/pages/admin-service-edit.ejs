@@ -1,0 +1,75 @@
+<%- include('../partials/header') %>
+
+<section class="section">
+    <div class="container">
+        <h2>Szolgáltatás módosítása</h2>
+
+        <p>
+            <strong>Állapot:</strong>
+            <%= service.active ? 'Aktív' : 'Inaktív' %>
+        </p>
+
+        <form
+            id="edit-service-form"
+            action="/admin/szolgaltatasok/<%= service.id %>/edit"
+            method="POST"
+        >
+            <input
+                type="text"
+                name="name"
+                value="<%= service.name %>"
+                required
+            >
+
+            <input
+                type="text"
+                name="short_description"
+                value="<%= service.short_description %>"
+                required
+            >
+
+            <textarea
+                name="detailed_description"
+                required
+            ><%= service.detailed_description %></textarea>
+
+            <input
+                type="text"
+                name="image"
+                value="<%= service.image || '' %>"
+                placeholder="Kép elérési útja"
+            >
+        </form>
+
+        <div class="form-actions">
+            <button type="submit" form="edit-service-form">
+                Mentés
+            </button>
+
+            <button
+                type="button"
+                onclick="window.location.href='/admin/szolgaltatasok'"
+            >
+                Mégse
+            </button>
+
+            <% if (service.active) { %>
+                <form
+                    action="/admin/szolgaltatasok/<%= service.id %>/deactivate"
+                    method="POST"
+                >
+                    <button type="submit">Deaktiválás</button>
+                </form>
+            <% } else { %>
+                <form
+                    action="/admin/szolgaltatasok/<%= service.id %>/restore"
+                    method="POST"
+                >
+                    <button type="submit">Visszaállítás</button>
+                </form>
+            <% } %>
+        </div>
+    </div>
+</section>
+
+<%- include('../partials/footer') %>

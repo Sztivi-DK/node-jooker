@@ -10,7 +10,16 @@
                     <% if (srv.image) { %><img src="<%= srv.image %>" alt="<%= srv.name %>"><% } %>
                     <h3><%= srv.name %></h3>
                     <p><%= srv.short_description %></p>
-                    <a href="/szolgaltatasok/<%= srv.id %>">Részletek</a>
+
+                    <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
+                        <p>Állapot: <%= srv.active ? 'Aktív' : 'Inaktív' %></p>
+                    <% } %>
+
+                    <a href="<%= typeof isAdmin !== 'undefined' && isAdmin
+                        ? '/admin/szolgaltatasok/' + srv.id + '/edit'
+                        : '/szolgaltatasok/' + srv.id %>">Részletek
+                    </a>
+                    
                 </div>
             <% } %>
         </div>
