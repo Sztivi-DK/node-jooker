@@ -4,6 +4,12 @@
     <div class="container">
         <h2>Szolgáltatás módosítása</h2>
 
+        <% if (typeof errors !== 'undefined') { %>
+            <% for (const key in errors) { %>
+                <p><%= errors[key] %></p>
+            <% } %>
+        <% } %>
+
         <p>
             <strong>Állapot:</strong>
             <%= service.active ? 'Aktív' : 'Inaktív' %>
@@ -18,19 +24,16 @@
                 type="text"
                 name="name"
                 value="<%= service.name %>"
-                required
             >
 
             <input
                 type="text"
                 name="short_description"
                 value="<%= service.short_description %>"
-                required
             >
 
             <textarea
                 name="detailed_description"
-                required
             ><%= service.detailed_description %></textarea>
 
             <input

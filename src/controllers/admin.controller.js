@@ -1,4 +1,5 @@
 const ServiceModel = require('../models/service.model');
+const validateService = require('../validators/service.validator');
 
 class AdminController {
     static adminPage(request, response) {
@@ -26,18 +27,39 @@ class AdminController {
         response.redirect('/admin/szolgaltatasok');
     }
     static async createService(request, response) {
-        const name = request.body.name;
-        const shortDescription = request.body.short_description;
-        const detailedDescription = request.body.detailed_description;
-        const image = request.body.image;
+        const { data, errors } = validateService(request.body);
+
+        if (Object.keys(errors).length) {
+            return response.status(400).render('pages/admin-service-create', {
+                title: 'Új szolgáltatás',
+                errors: errors
+            });
+        }
+
+        const existingService = await ServiceModel.getServiceByName(data.name);
+
+        if (existingService) {
+            return response.status(400).render('pages/admin-service-create', {
+                title: 'Új szolgáltatás',
+                errors: {
+                    name: 'Már létezik ilyen nevű szolgáltatás.'
+                }
+            });
+        }
 
         await ServiceModel.createService(
-            name, shortDescription, detailedDescription, image);
+            data.name,
+            data.shortDescription,
+            data.detailedDescription,
+            data.image
+        );
 
         response.redirect('/admin/szolgaltatasok');
     }
-    static newServicePage(request, response) {
-        response.render('pages/admin-service-create', {title: 'Új szolgáltatás'});
+    static createServicePage(request, response) {
+        response.render('pages/admin-service-create', {
+            title: 'Új szolgáltatás'
+        });
     }
     static async editServicePage(request, response) {
         const id = request.params.id;
@@ -47,12 +69,49 @@ class AdminController {
     }
     static async updateService(request, response) {
         const id = request.params.id;
-        const name = request.body.name;
-        const shortDescription = request.body.short_description;
-        const detailedDescription = request.body.detailed_description;
-        const image = request.body.image;
+        const { data, errors } = validateService(request.body);
 
-        await ServiceModel.updateService( id, name, shortDescription, detailedDescription, image);
+        if (Object.keys(errors).length) {
+            const service = await ServiceModel.getServiceByIdAdmin(id);
+
+            service.name = data.name;
+            service.short_description = data.shortDescription;
+            service.detailed_description = data.detailedDescription;
+            service.image = data.image;
+
+            return response.status(400).render('pages/admin-service-edit', {
+                title: 'Szolgáltatás módosítása',
+                service: service,
+                errors: errors
+            });
+        }
+
+        const existingService = await ServiceModel.getServiceByName(data.name);
+
+        if (existingService && existingService.id != id) {
+            const service = await ServiceModel.getServiceByIdAdmin(id);
+
+            service.name = data.name;
+            service.short_description = data.shortDescription;
+            service.detailed_description = data.detailedDescription;
+            service.image = data.image;
+
+            return response.status(400).render('pages/admin-service-edit', {
+                title: 'Szolgáltatás módosítása',
+                service: service,
+                errors: {
+                    name: 'Már létezik ilyen nevű szolgáltatás.'
+                }
+            });
+        }
+
+        await ServiceModel.updateService(
+            id,
+            data.name,
+            data.shortDescription,
+            data.detailedDescription,
+            data.image
+        );
 
         response.redirect('/admin/szolgaltatasok');
     }

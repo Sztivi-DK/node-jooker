@@ -42,6 +42,11 @@ class ServiceModel {
             [name, shortDescription, detailedDescription, image || null, id]);
         return result;
     }
+    static async getServiceByName(name) {
+        const [results] = await connection.query('SELECT * FROM services WHERE name = ?', [name]);
+
+        return results[0];
+    }
 }
 
 module.exports = ServiceModel;

@@ -4,25 +4,28 @@
     <div class="container">
         <h2>Új szolgáltatás</h2>
 
+        <% if (typeof errors !== 'undefined') { %>
+            <% for (const key in errors) { %>
+                <p><%= errors[key] %></p>
+            <% } %>
+        <% } %>
+
         <form action="/admin/szolgaltatasok/create" method="POST">
             <input
                 type="text"
                 name="name"
                 placeholder="Név"
-                required
             >
 
             <input
                 type="text"
                 name="short_description"
                 placeholder="Rövid leírás"
-                required
             >
 
             <textarea
                 name="detailed_description"
                 placeholder="Részletes leírás"
-                required
             ></textarea>
 
             <input
@@ -31,9 +34,11 @@
                 placeholder="Kép elérési útja"
             >
 
-            <button type="submit">
-                Mentés
-            </button>
+            <div class="form-actions">
+                <button type="submit">Mentés</button>
+                <button type="button"onclick="window.location.href='/admin/szolgaltatasok'">Mégse</button>
+            </div>
+
         </form>
     </div>
 </section>

@@ -19,10 +19,20 @@
                         ? '/admin/szolgaltatasok/' + srv.id + '/edit'
                         : '/szolgaltatasok/' + srv.id %>">Részletek
                     </a>
-                    
+
                 </div>
             <% } %>
         </div>
+
+         <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
+                <div class="form-actions">
+                    <button
+                        type="button"
+                        onclick="window.location.href='/admin/szolgaltatasok/create'">Új szolgáltatás
+                    </button>
+                </div>
+        <% } %>
+
     </div>
 </section>
 

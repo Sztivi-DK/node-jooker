@@ -188,6 +188,7 @@ form{
 }
 
 .form-actions{
+    margin-top:30px;
     display:flex;
     gap: 30px;
     justify-content:center;
