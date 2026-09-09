@@ -37,8 +37,8 @@ function validateReference(body) {
 
     if (!data.location) {
         errors.location = 'A helyszín megadása kötelező.';
-    } else if (data.location.length > 150) {
-        errors.location = 'A helyszín legfeljebb 150 karakter lehet.';
+    } else if (data.location.length > 50) {
+        errors.location = 'A helyszín legfeljebb 50 karakter lehet.';
     }
 
     if (!data.serviceId) {
