@@ -1,16 +1,17 @@
+const ServiceModel = require('../models/service.model');
+const ReferenceModel = require('../models/reference.model');
+
 class FeatureController {
 
     static async servicesPage(request, response) {
-        const serviceModel = require('../models/service.model');
-        const services = await serviceModel.getServices();
+        const services = await ServiceModel.getServices();
         const model = {title: 'Szolgáltatásaink', services: services};
         response.render('pages/services', model);
     }
     
     static async servicePage(request, response) {
         const id = request.params.id;
-        const serviceModel = require('../models/service.model');
-        const service = await serviceModel.getServiceById(id);
+        const service = await ServiceModel.getServiceById(id);
         if (!service) {
             return response.status(404).render('pages/notfound', {
                 title: 'Nem található'
@@ -21,16 +22,14 @@ class FeatureController {
     }
 
     static async referencesPage(request, response) {
-        const referenceModel = require('../models/reference.model');
-        const references = await referenceModel.getReferences();
+        const references = await ReferenceModel.getReferences();
         const model = {title: 'Eredményeink', references: references};
         response.render('pages/references', model);
     }
 
     static async readingPage(request, response) {
         const id = request.params.id;
-        const referenceModel = require('../models/reference.model');
-        const reference = await referenceModel.getReferenceById(id);
+        const reference = await ReferenceModel.getReferenceById(id);
         if (!reference) {
             return response.status(404).render('pages/notfound', {
                 title: 'Nem található'
