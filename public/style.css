@@ -194,6 +194,25 @@ form{
     justify-content:center;
 }
 
+.admin-menu{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    align-items:center;
+}
+
+.admin-menu a{
+    display:block;
+    width:320px;
+    padding:15px;
+    background:#d4af37;
+    color:white;
+    text-decoration:none;
+    text-align:center;
+    border-radius:10px;
+    font-weight:600;
+}
+
 input,
 textarea{
     padding:15px;
@@ -246,4 +265,5 @@ footer{
     .notfound p{
         font-size:18px;
     }
+    
 }

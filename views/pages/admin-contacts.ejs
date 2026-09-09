@@ -1,0 +1,35 @@
+<%- include('../partials/header') %>
+
+<section class="section">
+    <div class="container">
+        <h2>Beérkezett kapcsolatfelvételek</h2>
+
+        <% if (contacts.length === 0) { %>
+            <p>Nincs beérkezett üzenet.</p>
+        <% } else { %>
+            <% for (const contact of contacts) { %>
+                <div>
+                    <p><strong>Név:</strong> <%= contact.name %></p>
+                    <p><strong>Email:</strong> <%= contact.email %></p>
+                    <p>
+                        <strong>Érkezett:</strong>
+                        <%= contact.created_at.toLocaleString('hu-HU') %>
+                    </p>
+
+                    <a href="/admin/kapcsolatok/<%= contact.id %>">
+                        Megtekintés
+                    </a>
+                </div>
+            <% } %>
+        <% } %>
+
+        <button
+            type="button"
+            onclick="window.location.href='/admin'"
+        >
+            Vissza
+        </button>
+    </div>
+</section>
+
+<%- include('../partials/footer') %>

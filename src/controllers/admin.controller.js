@@ -1,3 +1,4 @@
+const ContactModel = require('../models/contact.model');
 const ServiceModel = require('../models/service.model');
 const ReferenceModel = require('../models/reference.model');
 const validateService = require('../validators/service.validator');
@@ -6,6 +7,26 @@ const validateReference = require('../validators/reference.validator');
 class AdminController {
     static adminPage(request, response) {
         response.render('pages/admin', {title: 'Admin'});
+    }
+    static async contactsPage(request, response) {
+        const contacts = await ContactModel.getContacts();
+
+        response.render('pages/admin-contacts', {
+            title: 'Kapcsolatfelvételek',
+            contacts: contacts});
+    }
+    static async contactPage(request, response) {
+        const id = request.params.id;
+        const contact = await ContactModel.getContactById(id);
+
+        if (!contact) {
+            return response.status(404).render('pages/notfound', {
+                title: 'Nem található'});
+        }
+
+        response.render('pages/admin-contact', {
+            title: 'Kapcsolatfelvétel',
+            contact: contact});
     }
     static async servicesPage(request, response) {
         const services = await ServiceModel.getAllServices();

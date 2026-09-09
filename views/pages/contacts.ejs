@@ -13,9 +13,18 @@
             </div>
 
             <form action="/kapcsolat" method="POST">
-                <input type="text" name="name" placeholder="Név" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <textarea name="message" placeholder="Üzenet" required></textarea>
+
+                <div>
+                    <% if (typeof errors !== 'undefined') { %>
+                        <% for (const key in errors) { %>
+                            <p><%= errors[key] %></p>
+                        <% } %>
+                    <% } %>
+                </div> 
+
+                <input type="text" name="name" placeholder="Név">
+                <input type="text" name="email" placeholder="Email">
+                <textarea name="message" placeholder="Üzenet"></textarea>
                 <button type="submit">
                     Küldés
                 </button>

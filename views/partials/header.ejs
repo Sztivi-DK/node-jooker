@@ -31,7 +31,18 @@
                         ? '/admin/referenciak' : '/referenciak' %>">Referenciák
                     </a>
                 </li>
-                <li><a href="/kapcsolat">Kapcsolat</a></li>
+                <li>
+                    <a href="<%= typeof isAdmin !== 'undefined' && isAdmin
+                        ? '/admin/kapcsolatok' : '/kapcsolat' %>">Kapcsolat
+                    </a>
+                </li>
+
+                <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
+                    <li><a href="/logout">Kilépés</a></li>
+                <% } else { %>
+                    <li><a href="/login">Belépés</a></li>
+                <% } %>
+
             </ul>
         </nav>
 

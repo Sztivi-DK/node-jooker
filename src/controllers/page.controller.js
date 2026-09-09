@@ -1,5 +1,6 @@
 const { response } = require('express');
 const PageModel = require('../models/page.model');
+const validateContact = require('../validators/contact.validator');
 
 class PageController {
     static homePage(request, response) {
@@ -14,10 +15,16 @@ class PageController {
 
     static async createContact(request, response) {
         const ContactModel = require('../models/contact.model');
-        const name = request.body.name;
-        const email = request.body.email;
-        const message = request.body.message;
-        await ContactModel.createContact(name, email, message);
+        const { data, errors } = validateContact(request.body);
+
+        if (Object.keys(errors).length) {
+            return response.status(400).render('pages/contacts', {
+                title: 'Elérhetőségeink',
+                errors: errors});
+        }
+
+        await ContactModel.createContact( data.name, data.email, data.message);
+
         response.redirect('/kapcsolat');
     }
     

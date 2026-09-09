@@ -18,6 +18,8 @@ router.get('/login', auth.loginPage);
 router.post('/login', auth.login);
 router.get('/logout', auth.logout);
 router.get('/admin', authMiddleware, admin.adminPage);
+router.get('/admin/kapcsolatok', authMiddleware, admin.contactsPage);
+router.get('/admin/kapcsolatok/:id', authMiddleware, admin.contactPage);
 router.get('/admin/szolgaltatasok', authMiddleware, admin.servicesPage);
 router.get('/admin/referenciak', authMiddleware, admin.referencesPage);
 router.get('/admin/referenciak/create', authMiddleware, admin.createReferencePage);

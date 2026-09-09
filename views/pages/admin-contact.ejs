@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+<section class="section">
+    <div class="container">
+        <h2>Kapcsolatfelvétel</h2>
+
+        <p><strong>Név:</strong> <%= contact.name %></p>
+
+        <p><strong>Email:</strong> <%= contact.email %></p>
+
+        <p>
+            <strong>Érkezett:</strong>
+            <%= contact.created_at.toLocaleString('hu-HU') %>
+        </p>
+
+        <p><strong>Üzenet:</strong></p>
+        <p><%= contact.message %></p>
+
+        <button
+            type="button"
+            onclick="window.location.href='/admin/kapcsolatok'"
+        >
+            Vissza
+        </button>
+    </div>
+</section>
+
+<%- include('../partials/footer') %>
