@@ -10,6 +10,8 @@ const adminContact = require('./controllers/admin-contact.controller');
 const adminService = require('./controllers/admin-service.controller');
 const adminReference = require('./controllers/admin-reference.controller');
 
+const apiService = require('./controllers/api-service.controller');
+
 router.get('/', pages.homePage);
 router.get('/szolgaltatasok', features.servicesPage);
 router.get('/szolgaltatasok/:id', features.servicePage);
@@ -20,6 +22,14 @@ router.post('/kapcsolat', pages.createContact);
 router.get('/login', auth.loginPage);
 router.post('/login', auth.login);
 router.get('/logout', auth.logout);
+
+router.get('/api/services', apiService.getServices);
+router.get('/api/services/:id', apiService.getServiceById);
+router.post('/api/services', apiService.createService);
+router.put('/api/services/:id', apiService.updateService);
+router.delete('/api/services/:id', apiService.deleteService);
+
+
 router.get('/admin', authMiddleware, admin.adminPage);
 router.get('/admin/kapcsolatok', authMiddleware, adminContact.contactsPage);
 router.get('/admin/kapcsolatok/:id', authMiddleware, adminContact.contactPage);
@@ -31,13 +41,6 @@ router.get('/admin/referenciak/:id/edit', authMiddleware, adminReference.editRef
 router.post('/admin/referenciak/:id/edit', authMiddleware, adminReference.updateReference);
 router.post('/admin/referenciak/:id/deactivate', authMiddleware, adminReference.deactivateReference);
 router.post('/admin/referenciak/:id/restore', authMiddleware, adminReference.restoreReference);
-
-router.get('/admin/test', authMiddleware, (request, response) => {
-    response.json({
-        success: true,
-        data: 'Sikeres admin hitelesítés'
-    });
-});
 
 router.get('/admin/szolgaltatasok', authMiddleware, adminService.servicesPage);
 router.get('/admin/szolgaltatasok/create', authMiddleware, adminService.createServicePage);
