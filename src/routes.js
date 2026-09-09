@@ -10,6 +10,7 @@ const adminContact = require('./controllers/admin-contact.controller');
 const adminService = require('./controllers/admin-service.controller');
 const adminReference = require('./controllers/admin-reference.controller');
 
+const apiContact = require('./controllers/api-contact.controller');
 const apiService = require('./controllers/api-service.controller');
 const apiReference = require('./controllers/api-reference.controller');
 const apiAuth = require('./middleware/api-auth.middleware');
@@ -24,6 +25,9 @@ router.post('/kapcsolat', pages.createContact);
 router.get('/login', auth.loginPage);
 router.post('/login', auth.login);
 router.get('/logout', auth.logout);
+
+router.get('/api/contacts', apiAuth, apiContact.getContacts);
+router.get('/api/contacts/:id', apiAuth, apiContact.getContactById);
 
 router.get('/api/services', apiService.getServices);
 router.get('/api/services/:id', apiService.getServiceById);
