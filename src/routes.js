@@ -11,6 +11,7 @@ const adminService = require('./controllers/admin-service.controller');
 const adminReference = require('./controllers/admin-reference.controller');
 
 const apiService = require('./controllers/api-service.controller');
+const apiReference = require('./controllers/api-reference.controller');
 
 router.get('/', pages.homePage);
 router.get('/szolgaltatasok', features.servicesPage);
@@ -29,6 +30,11 @@ router.post('/api/services', apiService.createService);
 router.put('/api/services/:id', apiService.updateService);
 router.delete('/api/services/:id', apiService.deleteService);
 
+router.get('/api/references', apiReference.getReferences);
+router.get('/api/references/:id', apiReference.getReferenceById);
+router.post('/api/references', apiReference.createReference);
+router.put('/api/references/:id', apiReference.updateReference);
+router.delete('/api/references/:id', apiReference.deleteReference);
 
 router.get('/admin', authMiddleware, admin.adminPage);
 router.get('/admin/kapcsolatok', authMiddleware, adminContact.contactsPage);
