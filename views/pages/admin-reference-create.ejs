@@ -1,0 +1,71 @@
+<%- include('../partials/header') %>
+
+<section class="section">
+    <div class="container">
+        <h2>Új referencia</h2>
+
+        <% if (typeof errors !== 'undefined') { %>
+            <% for (const key in errors) { %>
+                <p><%= errors[key] %></p>
+            <% } %>
+        <% } %>
+
+        <form action="/admin/referenciak/create" method="POST">
+            <input
+                type="text"
+                name="title"
+                placeholder="Cím"
+            >
+
+            <input
+                type="text"
+                name="short_description"
+                placeholder="Rövid leírás"
+            >
+
+            <textarea
+                name="detailed_description"
+                placeholder="Részletes leírás"
+            ></textarea>
+
+            <input
+                type="text"
+                name="image"
+                placeholder="Kép elérési útja"
+            >
+
+            <input
+                type="date"
+                name="date"
+            >
+
+            <input
+                type="text"
+                name="location"
+                placeholder="Helyszín"
+            >
+
+            <select name="service_id">
+                <% for (const service of services) { %>
+                    <option value="<%= service.id %>">
+                        <%= service.name %>
+                        <%= service.active ? '' : ' (inaktív)' %>
+                    </option>
+                <% } %>
+            </select>
+
+            <div class="form-actions">
+                <button type="submit">Mentés</button>
+
+                <button
+                    type="button"
+                    onclick="window.location.href='/admin/referenciak'"
+                >
+                    Mégse
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<%- include('../partials/footer') %>

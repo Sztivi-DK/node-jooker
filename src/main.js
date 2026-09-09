@@ -11,6 +11,9 @@ app.use(express.json());
 app.use(express.static('public') );
 app.use(cookieParser());
 
+const adminState = require('./middleware/admin-state.middleware');
+app.use(adminState);
+
 const router = require('./routes');
 app.use(router);
 

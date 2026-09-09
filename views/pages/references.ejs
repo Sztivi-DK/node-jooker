@@ -12,10 +12,33 @@
                     <% } %>
                     <h3><%= ref.title %></h3>
                     <p><%= ref.short_description %></p>
-                    <a href="/referenciak/<%= ref.id %>">Elolvasom</a>
+
+                    <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
+                        <p>
+                            Állapot: <%= ref.active ? 'Aktív' : 'Inaktív' %>
+                        </p>
+                    <% } %>
+
+                    <a href="<%= typeof isAdmin !== 'undefined' && isAdmin
+                        ? '/admin/referenciak/' + ref.id + '/edit'
+                        : '/referenciak/' + ref.id %>">
+                        Elolvasom
+                    </a>
                 </div>
             <% } %>
         </div>
+
+        <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
+            <div class="form-actions">
+                <button
+                    type="button"
+                    onclick="window.location.href='/admin/referenciak/create'"
+                >
+                    Új referencia
+                </button>
+            </div>
+        <% } %>
+
     </div>
 </section>
 

@@ -21,8 +21,16 @@
         <nav>
             <ul>
                 <li><a href="/">Rólunk</a></li>
-                <li><a href="/szolgaltatasok">Szolgáltatások</a></li>
-                <li><a href="/referenciak">Referenciák</a></li>
+                <li>
+                    <a href="<%= typeof isAdmin !== 'undefined' && isAdmin
+                        ? '/admin/szolgaltatasok' : '/szolgaltatasok' %>">Szolgáltatások
+                    </a>
+                </li>
+                <li>
+                    <a href="<%= typeof isAdmin !== 'undefined' && isAdmin
+                        ? '/admin/referenciak' : '/referenciak' %>">Referenciák
+                    </a>
+                </li>
                 <li><a href="/kapcsolat">Kapcsolat</a></li>
             </ul>
         </nav>

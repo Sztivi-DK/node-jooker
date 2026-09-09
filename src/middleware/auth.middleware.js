@@ -14,8 +14,11 @@ function auth(request, response, next) {
     }
 
     try {
-        jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        request.user = decoded;
+        response.locals.isAdmin = true;
         next();
+        
     } catch (error) {
         return response.redirect('/login');
     }

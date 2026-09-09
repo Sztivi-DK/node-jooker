@@ -1,0 +1,99 @@
+<%- include('../partials/header') %>
+
+<section class="section">
+    <div class="container">
+        <h2>Referencia módosítása</h2>
+
+        <% if (typeof errors !== 'undefined') { %>
+            <% for (const key in errors) { %>
+                <p><%= errors[key] %></p>
+            <% } %>
+        <% } %>
+
+        <p>
+            <strong>Állapot:</strong>
+            <%= reference.active ? 'Aktív' : 'Inaktív' %>
+        </p>
+
+        <form
+            id="edit-reference-form"
+            action="/admin/referenciak/<%= reference.id %>/edit"
+            method="POST"
+        >
+            <input
+                type="text"
+                name="title"
+                value="<%= reference.title %>"
+            >
+
+            <input
+                type="text"
+                name="short_description"
+                value="<%= reference.short_description %>"
+            >
+
+            <textarea
+                name="detailed_description"
+            ><%= reference.detailed_description %></textarea>
+
+            <input
+                type="text"
+                name="image"
+                value="<%= reference.image || '' %>"
+                placeholder="Kép elérési útja"
+            >
+
+            <input
+                type="date"
+                name="date"
+                value="<%= reference.date ? (typeof reference.date === 'string' ? reference.date
+                    : reference.date.toISOString().split('T')[0]) : '' %>"
+            >
+
+            <input
+                type="text"
+                name="location"
+                value="<%= reference.location || '' %>"
+                placeholder="Helyszín"
+            >
+
+            <select name="service_id">
+                <% for (const service of services) { %>
+                    <option
+                        value="<%= service.id %>"
+                        <%= service.id === reference.service_id ? 'selected' : '' %>
+                    >
+                        <%= service.name %><%= service.active ? '' : ' (inaktív)' %>
+                    </option>
+                <% } %>
+            </select>
+        </form>
+
+        <div class="form-actions">
+            <button type="submit" form="edit-reference-form"> Mentés
+            </button>
+
+            <button
+                type="button"
+                onclick="window.location.href='/admin/referenciak'">Mégse
+            </button>
+
+            <% if (reference.active) { %>
+                <form
+                    action="/admin/referenciak/<%= reference.id %>/deactivate"
+                    method="POST">
+                    <button type="submit">Deaktiválás</button>
+                </form>
+            <% } else { %>
+                <form
+                    action="/admin/referenciak/<%= reference.id %>/restore"
+                    method="POST">
+                    <button type="submit">Visszaállítás</button>
+                </form>
+            <% } %>
+
+        </div>
+    </div>
+</section>
+
+<%- include('../partials/footer') %>

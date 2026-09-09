@@ -19,12 +19,21 @@ router.post('/login', auth.login);
 router.get('/logout', auth.logout);
 router.get('/admin', authMiddleware, admin.adminPage);
 router.get('/admin/szolgaltatasok', authMiddleware, admin.servicesPage);
+router.get('/admin/referenciak', authMiddleware, admin.referencesPage);
+router.get('/admin/referenciak/create', authMiddleware, admin.createReferencePage);
+router.post('/admin/referenciak/create', authMiddleware, admin.createReference);
+router.get('/admin/referenciak/:id/edit', authMiddleware, admin.editReferencePage);
+router.post('/admin/referenciak/:id/edit', authMiddleware, admin.updateReference);
+router.post('/admin/referenciak/:id/deactivate', authMiddleware, admin.deactivateReference);
+router.post('/admin/referenciak/:id/restore', authMiddleware, admin.restoreReference);
+
 router.get('/admin/test', authMiddleware, (request, response) => {
     response.json({
         success: true,
         data: 'Sikeres admin hitelesítés'
     });
 });
+
 router.get('/admin/szolgaltatasok/create', authMiddleware, admin.createServicePage);
 router.post('/admin/szolgaltatasok/create', authMiddleware, admin.createService);
 router.get('/admin/szolgaltatasok/:id/edit', authMiddleware, admin.editServicePage);
